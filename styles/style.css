@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap");
 :root {
   --roboto: 'Roboto', sans-serif;
+  --pt: "PT Sans", sans-serif;
 }
 
 * {
@@ -10,25 +12,131 @@
 }
 
 html {
-  font-family: var(--roboto);
+  /* font-family: var(--roboto); */
+  font-family: var(--pt);
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+    background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
 }
 
 .container {
-  max-width: 800px;
-  margin: 0 auto;
+  /* max-width: 800px; */
+  /* margin: 0 auto; */
   /* border: 1px solid black; */
 }
 
-.form-section {
+.header {
+  text-align: center;
+}
+
+.header h1 {
+  color: #fff;
+  font-size: 4rem;
+  text-shadow: 1px 2px 5px #000;
+}
+
+.modal {
   padding: 1em;
-  border: 2px solid black;
+  /* border: 2px solid black; */
+  background-color: #fff;
 }
 
 .label {
   text-transform: capitalize;
 }
 
+.btn {
+  font-family: "PT Sans", sans-serif;
+  font-size: 1.2rem;
+  padding: 1rem 2.5rem;
+  cursor: pointer;
+  border: none;
+}
+
+.open-modal {
+  background: #fff;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  box-shadow: 0 5px 10px 2px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s linear;
+}
+
+.open-modal:hover {
+  box-shadow: none;
+  background: rgba(255, 255, 255, 0.5);
+  /* border-color: #fff; */
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.open {
+  display: flex;
+}
+
+.form {
+  padding: 5em;
+}
+
+
+.modal-container {
+  background-color: #fff;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+}
+
+.modal.open .modal-container {
+  animation: move 0.6s ease-out;
+}
+
+@keyframes move {
+  from {
+    transform: translateY(-50px);
+  }
+
+  to {
+    transform: translateY(0px);
+  }
+}
+
+.close-modal {
+  font-size: 3rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+  transition: color 0.15s linear;
+}
+
+.close-modal:hover {
+  color: #f00;
+}
+
 .book-list {
   display: flex;
   flex-wrap: wrap;
 }
+
+/* Change in app.js */
+/* .card {
+} */

@@ -1,4 +1,8 @@
 const submitButton = document.querySelector('#submit');
+const btnOpenModal = document.querySelector('.open-modal');
+const btnCloseModal = document.querySelector('.close-modal');
+const modalElm = document.querySelector('.modal');
+
 let myLibrary = [
   new Book('Down and Out in Paris and London', 'George Orwell', 232, true),
   new Book('Homage to Catalonia', 'George Orwell', 202, true),
@@ -41,6 +45,7 @@ function createBook(e) {
 }
 
 function addBookToLibrary(book) {
+  modalElm.classList.remove('open');
   return myLibrary.push(book);
 }
 
@@ -51,7 +56,7 @@ function clearForm() {
 function setStyling(element, details) {
   element.setAttribute(
     'style',
-    'display: flex; flex-direction: column; border: 2px solid black; padding: 1em; margin: 1em 1em 1em 0; border-radius: 5px; height: 250px; width: 250px; justify-content: center; text-align: center; line-height: 1.5',
+    'display: flex; flex-direction: column; background-color: #fff; padding: 1em; margin: 1em 1em 1em 0; border-radius: 5px; height: 250px; width: 250px; justify-content: center; text-align: center; line-height: 1.5',
   );
 
   element.innerHTML = `
@@ -70,6 +75,7 @@ function viewBookList(list) {
   for (book in list) {
     let bookDetails = list[book];
     let bookCard = document.createElement('div');
+    bookCard.classList.add('card');
     setStyling(bookCard, bookDetails);
     bookDiv.appendChild(bookCard);
   }
@@ -80,4 +86,10 @@ function viewBookList(list) {
 viewBookList(myLibrary);
 
 // Event listeners
+btnOpenModal.addEventListener('click', function () {
+  modalElm.classList.add('open');
+});
+btnCloseModal.addEventListener('click', function () {
+  modalElm.classList.remove('open');
+});
 submitButton.addEventListener('click', createBook);
