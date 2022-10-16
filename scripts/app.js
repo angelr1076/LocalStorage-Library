@@ -10,7 +10,7 @@ let myLibrary = [
 ];
 
 // let myLibrary = [];
-let count = myLibrary.length + 1;
+let count = myLibrary.length;
 
 // Constructor...
 function Book(title, author, pages, read) {
@@ -40,7 +40,7 @@ function createBook(e) {
   let read = document.querySelector('#read').value;
 
   // Instantiate new Book object
-  const newBook = new Book(title, author, pages, read);
+  const newBook = new Book(title, author, pages, read); // Add ID when instantiating
   addBookToLibrary(newBook);
   clearForm();
   viewBookList(myLibrary);
@@ -79,14 +79,23 @@ function createCard() {
   return bookCard;
 }
 
-function handleDelete() {
-  let deleteBookBtn = document.createElement('button');
-  deleteBookBtn.setAttribute(
+function deleteBookBtn() {
+  let btn = document.createElement('button');
+  // Style button
+  btn.setAttribute(
     'style',
     'color: white; background-color: blue; height: 2em; border-radius: 5px;',
   );
-  deleteBookBtn.innerHTML = 'Delete';
-  return deleteBookBtn;
+  btn.innerHTML = 'Delete';
+  return btn;
+}
+
+function handleDelete(e) {
+  let id = parseInt(e.path[1].attributes[1].value);
+  let book = myLibrary.find(item => item);
+  console.log(id);
+  console.log(book);
+  // console.log(myLibrary.filter(book => book.id !== id));
 }
 
 function viewBookList(list) {
@@ -95,7 +104,8 @@ function viewBookList(list) {
   for (book in list) {
     let bookDetails = list[book];
     let renderCard = createCard();
-    const deleteButton = handleDelete();
+    const deleteButton = deleteBookBtn();
+    deleteButton.addEventListener('click', handleDelete);
     setStyling(renderCard, bookDetails);
 
     renderCard.appendChild(deleteButton);
@@ -112,8 +122,6 @@ function addClass() {
 function removeClass() {
   return modalElement.classList.remove('open');
 }
-
-function deleteBook(id) {}
 
 viewBookList(myLibrary);
 
