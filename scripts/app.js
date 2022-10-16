@@ -1,14 +1,16 @@
 const submitButton = document.querySelector('#submit');
 const btnOpenModal = document.querySelector('.open-modal');
 const btnCloseModal = document.querySelector('.close-modal');
-const modalElm = document.querySelector('.modal');
+const modalElement = document.querySelector('.modal');
 
 let myLibrary = [
   new Book('Down and Out in Paris and London', 'George Orwell', 232, true),
   new Book('Homage to Catalonia', 'George Orwell', 202, true),
   new Book('Shooting an Elephant', 'George Orwell', 368, false),
 ];
+
 // let myLibrary = [];
+let count = myLibrary.length + 1;
 
 // Constructor...
 function Book(title, author, pages, read) {
@@ -45,7 +47,7 @@ function createBook(e) {
 }
 
 function addBookToLibrary(book) {
-  modalElm.classList.remove('open');
+  modalElement.classList.remove('open');
   return myLibrary.push(book);
 }
 
@@ -69,27 +71,53 @@ function setStyling(element, details) {
     <p>${details.read === true ? 'Read' : 'Unread'}</p>`;
 }
 
+function createCard() {
+  let bookCard = document.createElement('div');
+  bookCard.classList.add('card');
+  bookCard.setAttribute('data-target', `${count++}`); // Set target ID
+
+  return bookCard;
+}
+
+function handleDelete() {
+  let deleteBookBtn = document.createElement('button');
+  deleteBookBtn.setAttribute(
+    'style',
+    'color: white; background-color: blue; height: 2em; border-radius: 5px;',
+  );
+  deleteBookBtn.innerHTML = 'Delete';
+  return deleteBookBtn;
+}
+
 function viewBookList(list) {
   const bookDiv = document.querySelector('.book-list');
 
   for (book in list) {
     let bookDetails = list[book];
-    let bookCard = document.createElement('div');
-    bookCard.classList.add('card');
-    setStyling(bookCard, bookDetails);
-    bookDiv.appendChild(bookCard);
+    let renderCard = createCard();
+    const deleteButton = handleDelete();
+    setStyling(renderCard, bookDetails);
+
+    renderCard.appendChild(deleteButton);
+    bookDiv.appendChild(renderCard);
   }
 
   return bookDiv;
 }
 
+function addClass() {
+  return modalElement.classList.add('open');
+}
+
+function removeClass() {
+  return modalElement.classList.remove('open');
+}
+
+function deleteBook(id) {}
+
 viewBookList(myLibrary);
 
 // Event listeners
-btnOpenModal.addEventListener('click', function () {
-  modalElm.classList.add('open');
-});
-btnCloseModal.addEventListener('click', function () {
-  modalElm.classList.remove('open');
-});
+btnOpenModal.addEventListener('click', addClass);
+btnCloseModal.addEventListener('click', removeClass);
 submitButton.addEventListener('click', createBook);
