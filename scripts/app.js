@@ -3,36 +3,36 @@ const btnOpenModal = document.querySelector('.open-modal');
 const btnCloseModal = document.querySelector('.close-modal');
 const modalElement = document.querySelector('.modal');
 
+// Constructor...
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = Number(pages);
+
+    // Methods
+    this.bookInfo = function () {
+      const wasRead = this.read === true ? 'read' : 'not read';
+      return `${this.title} written by ${this.author}, ${this.pages} pages in length was ${wasRead}.`;
+    };
+    this.read = Boolean(read);
+    return this.bookInfo();
+  }
+}
+
 let myLibrary = [
   new Book('Down and Out in Paris and London', 'George Orwell', 232, true),
   new Book('Homage to Catalonia', 'George Orwell', 202, true),
   new Book('Shooting an Elephant', 'George Orwell', 368, false),
 ];
+let count = myLibrary.length - 3;
 
 // let myLibrary = [];
-let count = myLibrary.length;
-
-// Constructor...
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = Number(pages);
-  this.read = Boolean(read);
-
-  // Methods
-  this.bookInfo = function () {
-    const wasRead = this.read === true ? 'read' : 'not read';
-    console.log(
-      `${this.title} written by ${this.author}, ${this.pages} pages in length was ${wasRead}.`,
-    );
-  };
-
-  return this.bookInfo();
-}
+// let count = myLibrary.length;
 
 function createBook(e) {
   e.preventDefault();
-  myLibrary = [];
+  // myLibrary = [];
 
   let title = document.querySelector('#title').value;
   let author = document.querySelector('#author').value;
@@ -47,7 +47,9 @@ function createBook(e) {
 }
 
 function addBookToLibrary(book) {
-  modalElement.classList.remove('open');
+  // Hide modal
+  removeClass();
+  // Add book to array
   return myLibrary.push(book);
 }
 
@@ -55,10 +57,10 @@ function clearForm() {
   document.querySelector('#form').reset();
 }
 
-function setStyling(element, details) {
+function setCardStyle(element, details) {
   element.setAttribute(
     'style',
-    'display: flex; flex-direction: column; background-color: #fff; padding: 1em; margin: 1em 1em 1em 0; border-radius: 5px; height: 250px; width: 250px; justify-content: center; text-align: center; line-height: 1.5',
+    'display: flex; flex-direction: column; justify-content: space-between; text-align: center; background-color: #fff; padding: 1em; margin: 1em 1em 1em 0; border-radius: 5px; height: 250px; width: 250px; line-height: 1.5; box-shadow: 0 5px 10px 2px rgba(0, 0, 0, 0.2);',
   );
 
   element.innerHTML = `
@@ -79,34 +81,47 @@ function createCard() {
   return bookCard;
 }
 
-function deleteBookBtn() {
+function removeBookBtn() {
   let btn = document.createElement('button');
   // Style button
   btn.setAttribute(
     'style',
-    'color: white; background-color: blue; height: 2em; border-radius: 5px;',
+    'color: red; height: 2.5em; width: 50%; border-radius: 5px; margin: 0 auto; font-weight: bold; text-transform: uppercase; cursor: pointer;',
   );
   btn.innerHTML = 'Delete';
   return btn;
 }
 
 function handleDelete(e) {
-  let id = parseInt(e.path[1].attributes[1].value);
-  let book = myLibrary.find(item => item);
-  console.log(id);
-  console.log(book);
-  // console.log(myLibrary.filter(book => book.id !== id));
+  // Get book's data-target
+  let bookIndex = parseInt(e.path[1].attributes[1].value);
+  // newArray = myLibrary.splice(bookIndex, 1);
+  myLibrary = myLibrary.filter((book, index) => {
+    if (book !== bookIndex) {
+      return index;
+    }
+  });
+  console.log(myLibrary);
+  viewBookList(myLibrary);
+}
+
+function clearDOM(element) {
+  while (element.firstElementChild) {
+    element.firstElementChild.remove();
+  }
 }
 
 function viewBookList(list) {
   const bookDiv = document.querySelector('.book-list');
+  clearDOM(bookDiv);
 
   for (book in list) {
     let bookDetails = list[book];
     let renderCard = createCard();
-    const deleteButton = deleteBookBtn();
+    const deleteButton = removeBookBtn();
+
     deleteButton.addEventListener('click', handleDelete);
-    setStyling(renderCard, bookDetails);
+    setCardStyle(renderCard, bookDetails);
 
     renderCard.appendChild(deleteButton);
     bookDiv.appendChild(renderCard);
