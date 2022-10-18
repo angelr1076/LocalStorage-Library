@@ -23,12 +23,12 @@ class Book {
 let myLibrary = [
   new Book('Down and Out in Paris and London', 'George Orwell', 232, true),
   new Book('Homage to Catalonia', 'George Orwell', 202, true),
-  new Book('Shooting an Elephant', 'George Orwell', 368, false),
+  new Book('Shooting an Elephant', 'George Orwell', 250, false),
+  new Book('1984', 'George Orwell', 368, false),
+  new Book('Burmese Days', 'George Orwell', 276, false),
 ];
-let count = myLibrary.length - 3;
 
 // let myLibrary = [];
-// let count = myLibrary.length;
 
 function createBook(e) {
   e.preventDefault();
@@ -44,6 +44,10 @@ function createBook(e) {
   addBookToLibrary(newBook);
   clearForm();
   viewBookList(myLibrary);
+
+  myLibrary.forEach((book, i) => {
+    book.id = i;
+  });
 }
 
 function addBookToLibrary(book) {
@@ -73,11 +77,12 @@ function setCardStyle(element, details) {
     <p>${details.read === true ? 'Read' : 'Unread'}</p>`;
 }
 
-function createCard() {
+function createCard(book) {
   let bookCard = document.createElement('div');
   bookCard.classList.add('card');
-  bookCard.setAttribute('data-target', `${count++}`); // Set target ID
-
+  let bookId = parseInt(book);
+  // Set the data-target of the card
+  bookCard.setAttribute('data-target', `${bookId}`);
   return bookCard;
 }
 
@@ -95,13 +100,7 @@ function removeBookBtn() {
 function handleDelete(e) {
   // Get book's data-target
   let bookIndex = parseInt(e.path[1].attributes[1].value);
-  // newArray = myLibrary.splice(bookIndex, 1);
-  myLibrary = myLibrary.filter((book, index) => {
-    if (book !== bookIndex) {
-      return index;
-    }
-  });
-  console.log(myLibrary);
+  myLibrary.splice(bookIndex, 1);
   viewBookList(myLibrary);
 }
 
@@ -117,7 +116,8 @@ function viewBookList(list) {
 
   for (book in list) {
     let bookDetails = list[book];
-    let renderCard = createCard();
+    // Pass book ID to createCard function
+    let renderCard = createCard(book);
     const deleteButton = removeBookBtn();
 
     deleteButton.addEventListener('click', handleDelete);
