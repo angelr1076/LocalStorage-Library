@@ -224,5 +224,5 @@ input[type="checkbox"] {
 }
 
 .addBtn:hover {
-  background-color:
+  background-color: var(--greyishLight);
 }
