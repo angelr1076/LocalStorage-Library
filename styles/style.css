@@ -8,7 +8,8 @@
   --lightRed: rgba(255, 0, 0, 0.7);
   --dimBlack: rgba(0, 0, 0, 0.4);
   --greenish: rgba(0, 150, 0, 0.4);
-  --blueish: rgba(4, 88, 172, 0.833);
+  --blueish: rgba(4, 88, 172, 0.8);
+  --greyishLight: rgb(234, 237, 239);
 }
 
 *,
@@ -220,4 +221,8 @@ input[type="checkbox"] {
 
 .createBook {
   margin: 1.5em 0;
+}
+
+.addBtn:hover {
+  background-color:
 }

@@ -9,7 +9,7 @@ class Book {
     this.title = title;
     this.author = author;
     this.pages = Number(pages);
-    this.read = Boolean(read);
+    this.read = read;
 
     // Methods
     this.bookInfo = function () {
@@ -24,7 +24,6 @@ class Book {
 let myLibrary = [
   new Book('Down and Out in Paris and London', 'George Orwell', 232, true),
   new Book('Homage to Catalonia', 'George Orwell', 202, true),
-  new Book('Burmese Days', 'George Orwell', 276, false),
 ];
 
 function createBook(e) {
@@ -33,10 +32,10 @@ function createBook(e) {
   let title = document.querySelector('#title').value;
   let author = document.querySelector('#author').value;
   let pages = document.querySelector('#pages').value;
-  let read = document.querySelector('#read').value;
+  let read = document.querySelector('.read').checked;
+  console.log(title, author, pages, read);
 
   // Instantiate new Book object
-  const newBook = new Book(title, author, pages, read);
   addBookToLibrary(newBook);
   clearForm();
   viewBookList(myLibrary);
@@ -44,6 +43,7 @@ function createBook(e) {
 }
 
 function addIdToCard() {
+  // Set the card's ID
   return myLibrary.forEach((book, i) => {
     book.id = i;
   });
