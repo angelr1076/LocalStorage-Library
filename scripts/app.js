@@ -33,9 +33,9 @@ function createBook(e) {
   let author = document.querySelector('#author').value;
   let pages = document.querySelector('#pages').value;
   let read = document.querySelector('.read').checked;
-  console.log(title, author, pages, read);
 
   // Instantiate new Book object
+  const newBook = new Book(title, author, pages, read);
   addBookToLibrary(newBook);
   clearForm();
   viewBookList(myLibrary);
