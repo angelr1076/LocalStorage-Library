@@ -61,9 +61,9 @@ function setCardStyle(element, details) {
 
   element.innerHTML = `
     <h2 class="book-title">${details.title}</h2>
-
     <p>${details.author}</p>
-    <p>${details.pages} pages</p>`;
+    <p>${details.pages} pages</p>
+    `;
 }
 
 function createCard(book) {
@@ -89,9 +89,9 @@ function readBtn(e) {
     btn.classList.add('readBtn', 'btn');
     btn.innerHTML = 'Read';
   } else {
-    btn.innerHTML = 'Not Read';
     btn.classList.remove('readBtn');
     btn.classList.add('unread', 'btn');
+    btn.innerHTML = 'Not Read';
   }
   return btn;
 }
