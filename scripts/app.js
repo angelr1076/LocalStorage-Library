@@ -3,36 +3,32 @@ const btnOpenModal = document.querySelector('.open-modal');
 const btnCloseModal = document.querySelector('.close-modal');
 const modalElement = document.querySelector('.modal');
 
-// Constructor...
+// Book constructor
 class Book {
   constructor(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = Number(pages);
+    this.read = Boolean(read);
 
     // Methods
     this.bookInfo = function () {
       const wasRead = this.read === true ? 'read' : 'not read';
       return `${this.title} written by ${this.author}, ${this.pages} pages in length was ${wasRead}.`;
     };
-    this.read = Boolean(read);
     return this.bookInfo();
   }
 }
 
+// Seed library
 let myLibrary = [
   new Book('Down and Out in Paris and London', 'George Orwell', 232, true),
   new Book('Homage to Catalonia', 'George Orwell', 202, true),
-  new Book('Shooting an Elephant', 'George Orwell', 250, false),
-  new Book('1984', 'George Orwell', 368, false),
   new Book('Burmese Days', 'George Orwell', 276, false),
 ];
 
-// let myLibrary = [];
-
 function createBook(e) {
   e.preventDefault();
-  // myLibrary = [];
 
   let title = document.querySelector('#title').value;
   let author = document.querySelector('#author').value;
@@ -40,12 +36,15 @@ function createBook(e) {
   let read = document.querySelector('#read').value;
 
   // Instantiate new Book object
-  const newBook = new Book(title, author, pages, read); // Add ID when instantiating
+  const newBook = new Book(title, author, pages, read);
   addBookToLibrary(newBook);
   clearForm();
   viewBookList(myLibrary);
+  addIdToCard();
+}
 
-  myLibrary.forEach((book, i) => {
+function addIdToCard() {
+  return myLibrary.forEach((book, i) => {
     book.id = i;
   });
 }
@@ -57,24 +56,14 @@ function addBookToLibrary(book) {
   return myLibrary.push(book);
 }
 
-function clearForm() {
-  document.querySelector('#form').reset();
-}
-
 function setCardStyle(element, details) {
-  element.setAttribute(
-    'style',
-    'display: flex; flex-direction: column; justify-content: space-between; text-align: center; background-color: #fff; padding: 1em; margin: 1em 1em 1em 0; border-radius: 5px; height: 250px; width: 250px; line-height: 1.5; box-shadow: 0 5px 10px 2px rgba(0, 0, 0, 0.2);',
-  );
+  element.classList.add('card');
 
   element.innerHTML = `
-    <h3 class="title">${details.title}</h3>
-    <br>
-    <hr>
-    <br>
+    <h2 class="book-title">${details.title}</h2>
+
     <p>${details.author}</p>
-    <p>${details.pages} pages</p>
-    <p>${details.read === true ? 'Read' : 'Unread'}</p>`;
+    <p>${details.pages} pages</p>`;
 }
 
 function createCard(book) {
@@ -88,19 +77,38 @@ function createCard(book) {
 
 function removeBookBtn() {
   let btn = document.createElement('button');
-  // Style button
-  btn.setAttribute(
-    'style',
-    'color: red; height: 2.5em; width: 50%; border-radius: 5px; margin: 0 auto; font-weight: bold; text-transform: uppercase; cursor: pointer;',
-  );
-  btn.innerHTML = 'Delete';
+  btn.classList.add('removeBtn', 'btn');
+  btn.textContent = 'Delete';
+  return btn;
+}
+
+function readBtn(e) {
+  let readStatus = myLibrary[e].read;
+  let btn = document.createElement('button');
+  if (readStatus === true) {
+    btn.classList.add('readBtn', 'btn');
+    btn.innerHTML = 'Read';
+  } else {
+    btn.innerHTML = 'Not Read';
+    btn.classList.remove('readBtn');
+    btn.classList.add('unread', 'btn');
+  }
   return btn;
 }
 
 function handleDelete(e) {
-  // Get book's data-target
-  let bookIndex = parseInt(e.path[1].attributes[1].value);
+  let bookIndex = parseInt(e.path[1].attributes[1].value); // Get book's ID
   myLibrary.splice(bookIndex, 1);
+  viewBookList(myLibrary);
+}
+
+function handleToggleRead(e) {
+  let bookIndex = parseInt(e.path[1].attributes[1].value); // Get book's ID
+  let readStatus = myLibrary[bookIndex].read;
+  readStatus === true
+    ? (myLibrary[bookIndex].read = !true)
+    : (myLibrary[bookIndex].read = true);
+
   viewBookList(myLibrary);
 }
 
@@ -108,6 +116,10 @@ function clearDOM(element) {
   while (element.firstElementChild) {
     element.firstElementChild.remove();
   }
+}
+
+function clearForm() {
+  document.querySelector('#form').reset();
 }
 
 function viewBookList(list) {
@@ -119,10 +131,13 @@ function viewBookList(list) {
     // Pass book ID to createCard function
     let renderCard = createCard(book);
     const deleteButton = removeBookBtn();
+    const readButton = readBtn(book);
 
     deleteButton.addEventListener('click', handleDelete);
-    setCardStyle(renderCard, bookDetails);
+    readButton.addEventListener('click', handleToggleRead);
 
+    setCardStyle(renderCard, bookDetails);
+    renderCard.appendChild(readButton);
     renderCard.appendChild(deleteButton);
     bookDiv.appendChild(renderCard);
   }

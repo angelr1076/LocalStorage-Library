@@ -3,47 +3,65 @@
 :root {
   --roboto: 'Roboto', sans-serif;
   --pt: "PT Sans", sans-serif;
+  --vt: "VT323", monospace;
+  --dimRed: rgba(255, 0, 0, 0.4);
+  --lightRed: rgba(255, 0, 0, 0.7);
+  --dimBlack: rgba(0, 0, 0, 0.4);
+  --greenish: rgba(0, 150, 0, 0.4);
+  --blueish: rgba(4, 88, 172, 0.833);
 }
 
-* {
+*,
+*:before,
+*:after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-
-html {
-  font-family: var(--roboto);
+  font-family: var(--vt);
 }
 
 body {
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  background-image: linear-gradient(to top, #a6c1ee 0%, #fbc2eb 100%);
+  /* Pulled from UI designer and illustrator Steve Schoger from heropatterns.com for the svg */
+    background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 0h2v20H9V0zm25.134.84l1.732 1-10 17.32-1.732-1 10-17.32zm-20 20l1.732 1-10 17.32-1.732-1 10-17.32zM58.16 4.134l1 1.732-17.32 10-1-1.732 17.32-10zm-40 40l1 1.732-17.32 10-1-1.732 17.32-10zM80 9v2H60V9h20zM20 69v2H0v-2h20zm79.32-55l-1 1.732-17.32-10L82 4l17.32 10zm-80 80l-1 1.732-17.32-10L2 84l17.32 10zm96.546-75.84l-1.732 1-10-17.32 1.732-1 10 17.32zm-100 100l-1.732 1-10-17.32 1.732-1 10 17.32zM38.16 24.134l1 1.732-17.32 10-1-1.732 17.32-10zM60 29v2H40v-2h20zm19.32 5l-1 1.732-17.32-10L62 24l17.32 10zm16.546 4.16l-1.732 1-10-17.32 1.732-1 10 17.32zM111 40h-2V20h2v20zm3.134.84l1.732 1-10 17.32-1.732-1 10-17.32zM40 49v2H20v-2h20zm19.32 5l-1 1.732-17.32-10L42 44l17.32 10zm16.546 4.16l-1.732 1-10-17.32 1.732-1 10 17.32zM91 60h-2V40h2v20zm3.134.84l1.732 1-10 17.32-1.732-1 10-17.32zm24.026 3.294l1 1.732-17.32 10-1-1.732 17.32-10zM39.32 74l-1 1.732-17.32-10L22 64l17.32 10zm16.546 4.16l-1.732 1-10-17.32 1.732-1 10 17.32zM71 80h-2V60h2v20zm3.134.84l1.732 1-10 17.32-1.732-1 10-17.32zm24.026 3.294l1 1.732-17.32 10-1-1.732 17.32-10zM120 89v2h-20v-2h20zm-84.134 9.16l-1.732 1-10-17.32 1.732-1 10 17.32zM51 100h-2V80h2v20zm3.134.84l1.732 1-10 17.32-1.732-1 10-17.32zm24.026 3.294l1 1.732-17.32 10-1-1.732 17.32-10zM100 109v2H80v-2h20zm19.32 5l-1 1.732-17.32-10 1-1.732 17.32 10zM31 120h-2v-20h2v20z' fill='%239C92AC' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E"),
+      linear-gradient(to top, #a6c1ee 0%, #fbc2eb 100%);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.container {
+  max-width: 1100px;
+  padding: 2em;
 }
 
 .header {
-  text-align: center;
-  margin-top: 2em;
+  display: flex;
+  justify-content: center;
+  margin: 2em 0;
+}
+
+.books {
+  width: 75px;
+  height: auto;
+  margin-right: .25em;
 }
 
 .header h1 {
+  font-size: 5rem;
+  text-transform: uppercase;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #000;
+  }
+  
+.outline {
+  font-size: 20px;
   color: #fff;
-  font-size: 4rem;
-  text-shadow: 1px 2px 5px #000;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: red;
 }
 
-.modal {
-  padding: 1em;
-  background-color: #fff;
-}
-
-.label {
-  text-transform: capitalize;
-}
-
-.btn {
-  font-family: "PT Sans", sans-serif;
+.addBtn {
   font-size: 1.2rem;
   padding: 1rem 2.5rem;
   cursor: pointer;
@@ -59,19 +77,20 @@ body {
   height: 100vh;
   align-items: center;
   justify-content: center;
+  background-color: #fff;
   background: rgba(0, 0, 0, 0.7);
 }
 
 .open-modal {
   background: #fff;
   border-radius: 5px;
-  box-shadow: 0 5px 10px 2px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--dimBlack);
   transition: all 0.2s linear;
+  text-transform: uppercase;
 }
 
 .open-modal:hover {
-  box-shadow: none;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(241, 238, 238, 0.8);
 }
 
 .modal.open {
@@ -79,47 +98,56 @@ body {
 }
 
 .form {
-  padding: 5em;
+  padding: 4em;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  letter-spacing: 1px;
 }
 
+.form-row {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.form-row>label {
+  font-size: 1rem;
+  margin-bottom: .5em;
+  margin-top: 1em;
+  text-transform: capitalize;
+}
+
+input[type="text"], input[type="number"] {
+  height: 3em;
+  padding-left: .75em;
+}
+
+input[type="checkbox"] {
+  height: 1.5em;
+}
 
 .modal-container {
   background-color: #fff;
   width: 90%;
   max-width: 450px;
   position: relative;
+  border-radius: 5px;
 }
 
 .modal.open .modal-container {
-  animation: move 0.6s ease-out;
+  animation: move 0.8s ease-in-out;
 }
 
 @keyframes move {
   from {
-    transform: translateY(-50px);
+    transform: translateY(-500px);
   }
 
   to {
     transform: translateY(0px);
   }
-}
-
-.close-modal {
-  font-size: 3rem;
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: #fff;
-  height: 40px;
-  width: 40px;
-  text-align: center;
-  line-height: 40px;
-  cursor: pointer;
-  transition: color 0.15s linear;
-}
-
-.close-modal:hover {
-  color: #f00;
 }
 
 .book-list {
@@ -129,6 +157,67 @@ body {
   gap: 2em;
 }
 
-/* Created in app.js */
-/* .card {
-} */
+.card {
+  display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    gap: 1em;
+    padding: 1.5em;
+    margin: 1em 1em 1em 0;
+    border-radius: 5px;
+    width: 300px;
+    line-height: 1.5;
+    border: 1px solid var(--dimBlack);
+}
+
+.book-title {
+  text-align: center;
+}
+
+.removeBtn, .readBtn, .unread, .createBook, .cancel {
+  font-weight: bold;
+  height: 2.5em;
+  width: 100%;
+  border-radius: 5px;
+  margin: 0 auto;
+  cursor: pointer;
+  border: 1px solid var(--dimBlack);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.btn {
+  letter-spacing: 3px;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+.removeBtn {
+  border: 1px solid var(--dimBlack);
+  background-color: #fff;
+  color: var(--lightRed);
+}
+
+.removeBtn:hover {
+  opacity: 0.7;
+}
+
+.readBtn, .createBook {
+  border: none;
+  background-color: var(--blueish);
+  color: #fff;
+}
+
+.unread {
+  border: 1px solid var(--lightRed);
+  background-color: var(--lightRed);
+  color: #fff;
+}
+
+.createBook {
+  margin: 1.5em 0;
+}

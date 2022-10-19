@@ -5,17 +5,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles/style.css">
+  <link rel="icon" type="image/x-icon" href="assets/images/icons8-books-32.png">
   <script src="scripts/app.js" defer></script>
   <title>Odin Library</title>
 </head>
 <body>
   <div class="container">
     <header class="header">
-      <h1>Library</h1>
+      <img class="books" src="assets/images/icons8-books.svg">
+      <h1 class="outline">Library</h1>
     </header>
     <section class="modal open">
       <div class="modal-container">
-        <span id="close-modal" class="close-modal">&times;</span>
         <form action="" method="POST" name="bookForm" id="form" class="form">
           <div class="form-row">
             <label for="title" class="label">title: </label>
@@ -29,19 +30,20 @@
             <label for="pages" class="label">pages: </label>
             <input type="number" name="pages" id="pages" placeholder="232" required>
           </div>
-          <div class="form-row">
+          <div class="form-row checkbox-row">
             <label for="read" class="label">read: </label>
             <input type="checkbox" name="read" id="read">
           </div>
           <div class="button-container">
-            <input type="submit" value="Create" id="submit" class="submit">
+            <input type="submit" value="Create" id="submit" class="createBook submit btn">
+            <input type="submit" id="close-modal" value="Cancel" class="close-modal cancel btn"></input>
           </div>
         </form>
       </div>
     </section class="card-section">
     <section>
       <!-- Add plus icon -->
-      <button class="btn open-modal" id="open-modal">Add Book</button> 
+      <button class="addBtn open-modal" id="open-modal">Add Book</button> 
       <div class="book-list">
         <!-- Container for cards -->
       </div>
