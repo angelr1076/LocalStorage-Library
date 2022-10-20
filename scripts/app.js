@@ -6,9 +6,9 @@ const modalElement = document.querySelector('.modal');
 // Book constructor
 class Book {
   constructor(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = Number(pages);
+    this.title = title || 'Greatest Book';
+    this.author = author || 'Greatest Author';
+    this.pages = Number(pages) || Number(3000);
     this.read = read;
 
     // Methods
