@@ -3,39 +3,30 @@ const btnOpenModal = document.querySelector('.open-modal');
 const btnCloseModal = document.querySelector('.close-modal');
 const modalElement = document.querySelector('.modal');
 
-// Book constructor
-class Book {
-  constructor(title, author, pages, read) {
-    this.title = title || 'Greatest Book';
-    this.author = author || 'Greatest Author';
-    this.pages = Number(pages) || Number(3000);
-    this.read = read;
+function bookFactory(title, author, pages, read) {
+  const bookProperties = { title, author, pages, read };
 
-    // Methods
-    this.bookInfo = function () {
-      const wasRead = this.read === true ? 'read' : 'not read';
-      return `${this.title} written by ${this.author}, ${this.pages} pages in length was ${wasRead}.`;
-    };
-    return this.bookInfo();
-  }
+  return {
+    ...bookProperties,
+  };
 }
 
 // Seed library
 let myLibrary = [
-  new Book('Down and Out in Paris and London', 'George Orwell', 232, true),
-  new Book('Homage to Catalonia', 'George Orwell', 202, true),
+  bookFactory('Down and Out in Paris and London', 'George Orwell', 232, true),
+  bookFactory('Homage to Catalonia', 'George Orwell', 202, true),
 ];
 
 function createBook(e) {
   e.preventDefault();
 
-  let title = document.querySelector('#title').value;
-  let author = document.querySelector('#author').value;
-  let pages = document.querySelector('#pages').value;
-  let read = document.querySelector('.read').checked;
+  let title = document.querySelector('#title').value || 'Greatest Book';
+  let author = document.querySelector('#author').value || 'Amazing Author';
+  let pages = document.querySelector('#pages').value || 100000;
+  let read = document.querySelector('.read').checked || true;
 
   // Instantiate new Book object
-  const newBook = new Book(title, author, pages, read);
+  const newBook = bookFactory(title, author, pages, read);
   addBookToLibrary(newBook);
   clearForm();
   viewBookList(myLibrary);
