@@ -2,8 +2,8 @@
 
 :root {
   --roboto: 'Roboto', sans-serif;
-  --pt: "PT Sans", sans-serif;
-  --vt: "VT323", monospace;
+  --pt: 'PT Sans', sans-serif;
+  --vt: 'VT323', monospace;
   --dimRed: rgba(255, 0, 0, 0.4);
   --lightRed: rgba(255, 0, 0, 0.7);
   --dimBlack: rgba(0, 0, 0, 0.4);
@@ -27,7 +27,7 @@ body {
   justify-content: center;
   /* Pulled from UI designer and illustrator Steve Schoger from heropatterns.com for the svg */
   background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 0h2v20H9V0zm25.134.84l1.732 1-10 17.32-1.732-1 10-17.32zm-20 20l1.732 1-10 17.32-1.732-1 10-17.32zM58.16 4.134l1 1.732-17.32 10-1-1.732 17.32-10zm-40 40l1 1.732-17.32 10-1-1.732 17.32-10zM80 9v2H60V9h20zM20 69v2H0v-2h20zm79.32-55l-1 1.732-17.32-10L82 4l17.32 10zm-80 80l-1 1.732-17.32-10L2 84l17.32 10zm96.546-75.84l-1.732 1-10-17.32 1.732-1 10 17.32zm-100 100l-1.732 1-10-17.32 1.732-1 10 17.32zM38.16 24.134l1 1.732-17.32 10-1-1.732 17.32-10zM60 29v2H40v-2h20zm19.32 5l-1 1.732-17.32-10L62 24l17.32 10zm16.546 4.16l-1.732 1-10-17.32 1.732-1 10 17.32zM111 40h-2V20h2v20zm3.134.84l1.732 1-10 17.32-1.732-1 10-17.32zM40 49v2H20v-2h20zm19.32 5l-1 1.732-17.32-10L42 44l17.32 10zm16.546 4.16l-1.732 1-10-17.32 1.732-1 10 17.32zM91 60h-2V40h2v20zm3.134.84l1.732 1-10 17.32-1.732-1 10-17.32zm24.026 3.294l1 1.732-17.32 10-1-1.732 17.32-10zM39.32 74l-1 1.732-17.32-10L22 64l17.32 10zm16.546 4.16l-1.732 1-10-17.32 1.732-1 10 17.32zM71 80h-2V60h2v20zm3.134.84l1.732 1-10 17.32-1.732-1 10-17.32zm24.026 3.294l1 1.732-17.32 10-1-1.732 17.32-10zM120 89v2h-20v-2h20zm-84.134 9.16l-1.732 1-10-17.32 1.732-1 10 17.32zM51 100h-2V80h2v20zm3.134.84l1.732 1-10 17.32-1.732-1 10-17.32zm24.026 3.294l1 1.732-17.32 10-1-1.732 17.32-10zM100 109v2H80v-2h20zm19.32 5l-1 1.732-17.32-10 1-1.732 17.32 10zM31 120h-2v-20h2v20z' fill='%239C92AC' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E"),
-  linear-gradient(to top, #a6c1ee 0%, #fbc2eb 100%);
+    linear-gradient(to top, #a6c1ee 0%, #fbc2eb 100%);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
@@ -45,7 +45,7 @@ body {
 .books {
   width: 75px;
   height: auto;
-  margin-right: .25em;
+  margin-right: 0.25em;
 }
 
 .header h1 {
@@ -53,8 +53,8 @@ body {
   text-transform: uppercase;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #000;
-  }
-  
+}
+
 .outline {
   font-size: 20px;
   color: #fff;
@@ -113,19 +113,20 @@ body {
   flex-wrap: wrap;
 }
 
-.form-row>label {
+.form-row > label {
   font-size: 1rem;
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
   margin-top: 1em;
   text-transform: capitalize;
 }
 
-input[type="text"], input[type="number"] {
+input[type='text'],
+input[type='number'] {
   height: 3em;
-  padding-left: .75em;
+  padding-left: 0.75em;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   height: 1.5em;
 }
 
@@ -160,24 +161,28 @@ input[type="checkbox"] {
 
 .card {
   display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #fff;
-    gap: 1em;
-    padding: 1.5em;
-    margin: 1em 1em 1em 0;
-    border-radius: 5px;
-    width: 300px;
-    line-height: 1.5;
-    border: 1px solid var(--dimBlack);
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  gap: 1em;
+  padding: 1.5em;
+  margin: 1em 1em 1em 0;
+  border-radius: 5px;
+  width: 300px;
+  line-height: 1.5;
+  border: 1px solid var(--dimBlack);
 }
 
 .book-title {
   text-align: center;
 }
 
-.removeBtn, .readBtn, .unread, .createBook, .cancel {
+.removeBtn,
+.readBtn,
+.unread,
+.createBook,
+.cancel {
   font-weight: bold;
   height: 2.5em;
   width: 100%;
@@ -207,7 +212,8 @@ input[type="checkbox"] {
   opacity: 0.7;
 }
 
-.readBtn, .createBook {
+.readBtn,
+.createBook {
   border: none;
   background-color: var(--blueish);
   color: #fff;

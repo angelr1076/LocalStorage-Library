@@ -27,6 +27,7 @@ function createBook(e) {
 
   // Instantiate new Book object
   const newBook = bookFactory(title, author, pages, read);
+  console.log(newBook);
   addBookToLibrary(newBook);
   clearForm();
   viewBookList(myLibrary);
