@@ -1,53 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles/style.css">
-  <link rel="icon" type="image/x-icon" href="assets/images/icons8-books-32.png">
-  <script src="scripts/app.js" defer></script>
-  <title>Odin Library</title>
-</head>
-<body>
-  <div class="container">
-    <header class="header">
-      <img class="books" src="assets/images/icons8-books.svg">
-      <h1 class="outline">Library</h1>
-    </header>
-    <section class="modal">
-      <div class="modal-container">
-        <form action="" method="POST" name="bookForm" id="form" class="form">
-          <div class="form-row">
-            <label for="title" class="label">title: </label>
-            <input type="text" name="title" id="title" placeholder="Animal Farm" required>
-          </div>
-          <div class="form-row">
-            <label for="author" class="label">author: </label>
-            <input type="text" name="author" id="author" placeholder="George Orwell" required>
-          </div>
-          <div class="form-row">
-            <label for="pages" class="label">pages: </label>
-            <input type="number" name="pages" id="pages" placeholder="232" required>
-          </div>
-          <div class="form-row checkbox-row">
-            <label for="read" class="label">read: </label>
-            <input type="checkbox" name="read" id="read" class="read" value="yes">
-          </div>
-          <div class="button-container">
-            <input type="submit" value="Create" id="submit" class="createBook submit btn">
-            <input type="submit" id="close-modal" value="Cancel" class="close-modal cancel btn"></input>
-          </div>
-        </form>
-      </div>
-    </section>
-    <section>
-      <!-- Add plus icon -->
-      <button class="addBtn open-modal" id="open-modal">Add Book</button> 
-      <div class="book-list">
-        <!-- Container for cards -->
-      </div>
-    </section>
-  </div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="assets/images/icons8-books-32.png"
+    />
+    <script src="scripts/app.js" defer></script>
+    <title>Odin Library</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <img class="books" src="assets/images/icons8-books.svg" />
+        <h1 class="outline">Library</h1>
+      </header>
+      <section class="modal">
+        <div class="modal-container">
+          <form
+            action=""
+            method="POST"
+            name="bookForm"
+            id="form"
+            class="form"
+            novalidate
+          >
+            <div class="error-container">
+              <span class="error"></span>
+            </div>
+            <div class="form-row">
+              <label for="title" class="label">title: </label>
+              <input
+                type="text"
+                name="title"
+                id="title"
+                placeholder="Animal Farm"
+                pattern="^.{4,30}$"
+                required
+              />
+            </div>
+            <div class="form-row">
+              <label for="author" class="label">author: </label>
+              <input
+                type="text"
+                name="author"
+                id="author"
+                placeholder="George Orwell"
+                pattern="^.{4,25}$"
+                required
+              />
+            </div>
+            <div class="form-row">
+              <label for="pages" class="label">pages: </label>
+              <input
+                type="text"
+                name="pages"
+                id="pages"
+                placeholder="232"
+                pattern="^[0-9]{2,5}$"
+                required
+              />
+            </div>
+            <div class="form-row checkbox-row">
+              <label for="read" class="label"
+                >read:
+                <input
+                  type="checkbox"
+                  name="read"
+                  id="read"
+                  class="read"
+                  value="yes"
+              /></label>
+            </div>
+            <div class="button-container">
+              <button type="button" id="submit" class="createBook submit btn">
+                Create
+              </button>
+              <button
+                type="button"
+                id="close-modal"
+                class="close-modal cancel btn"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+      <section>
+        <!-- Add plus icon -->
+        <button class="addBtn open-modal" id="open-modal">Add Book</button>
+        <div class="book-list">
+          <!-- Container for cards -->
+        </div>
+      </section>
+    </div>
+  </body>
 </html>

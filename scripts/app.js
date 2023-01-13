@@ -2,6 +2,10 @@ const submitButton = document.querySelector('#submit');
 const btnOpenModal = document.querySelector('.open-modal');
 const btnCloseModal = document.querySelector('.close-modal');
 const modalElement = document.querySelector('.modal');
+let title = document.querySelector('#title');
+let author = document.querySelector('#author');
+let pages = document.querySelector('#pages');
+let errorMsgSpan = document.querySelector('.error');
 
 function bookFactory(title, author, pages, read) {
   const bookProperties = { title, author, pages, read };
@@ -20,13 +24,10 @@ let myLibrary = [
 function createBook(e) {
   e.preventDefault();
 
-  let title = document.querySelector('#title').value || 'Greatest Book';
-  let author = document.querySelector('#author').value || 'Amazing Author';
-  let pages = document.querySelector('#pages').value || 100000;
   let read = document.querySelector('.read').checked || true;
 
   // Instantiate new Book object
-  const newBook = bookFactory(title, author, pages, read);
+  const newBook = bookFactory(title.value, author.value, pages.value, read);
   console.log(newBook);
   addBookToLibrary(newBook);
   clearForm();
@@ -143,6 +144,58 @@ function addClass() {
 
 function removeClass() {
   return modalElement.classList.remove('open');
+}
+
+title.addEventListener('input', e => {
+  if (!title.validity.patternMismatch) {
+    // reset error message view
+    errorMsgSpan.textContent = '';
+    errorMsgSpan.className = 'error';
+  } else {
+    showError();
+    console.log(title.validationMessage);
+  }
+});
+
+author.addEventListener('input', e => {
+  if (!author.validity.patternMismatch) {
+    // reset error message view
+    errorMsgSpan.textContent = '';
+    errorMsgSpan.className = 'error';
+  } else {
+    showError();
+    console.log(author.validationMessage);
+  }
+});
+
+pages.addEventListener('input', e => {
+  if (!pages.validity.patternMismatch) {
+    // reset error message view
+    errorMsgSpan.textContent = '';
+    errorMsgSpan.className = 'error';
+  } else {
+    showError();
+    console.log(pages.validationMessage);
+  }
+});
+
+function showError() {
+  if (title.validity.patternMismatch) {
+    errorToggle();
+    errorMsgSpan.textContent =
+      'You must add a book title between 4-30 characters in length.';
+  } else if (author.validity.patternMismatch) {
+    errorToggle();
+    errorMsgSpan.textContent = `You must add an author's name between 4-25 characters in length.`;
+  } else if (pages.validity.patternMismatch) {
+    errorToggle();
+    errorMsgSpan.textContent =
+      'You can only enter integers into this field between 2 and 5 characters.';
+  }
+}
+
+function errorToggle() {
+  errorMsgSpan.classList.add('active');
 }
 
 viewBookList(myLibrary);

@@ -232,3 +232,57 @@ input[type='checkbox'] {
 .addBtn:hover {
   background-color: var(--greyishLight);
 }
+
+/* Form validation */
+.checkbox-row,
+.read {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+input[type='text'],
+input[type='number'],
+input[type='checkbox'] {
+  border: 1px solid #333;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: 90%;
+}
+
+/* This is our style for the invalid fields */
+#title:invalid,
+#author:invalid,
+#pages:invalid {
+  border-color: #900;
+  background-color: #fdd;
+}
+
+input:focus:invalid {
+  outline: none;
+}
+
+/* This is the style of our error messages */
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error {
+  width: 100%;
+  padding: 1em;
+
+  font-size: 1rem;
+  letter-spacing: 0;
+  text-align: center;
+  color: white;
+  background-color: var(--lightRed);
+  border-radius: 5px;
+
+  display: none;
+}
+
+.error.active {
+  display: inline-block;
+  padding: 0.3em;
+}
