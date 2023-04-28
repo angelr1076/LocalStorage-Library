@@ -16,11 +16,35 @@
     };
   }
 
+  function loadFromLocalStorage() {
+    const storedLibrary = localStorage.getItem('myLibrary');
+    if (storedLibrary) {
+      const parsedLibrary = JSON.parse(storedLibrary);
+      return parsedLibrary;
+    } else {
+      alert('No stored library found');
+      return [];
+    }
+  }
+
+  function saveToLocalStorage() {
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+  }
+
   // Seed library
-  const myLibrary = [
-    bookFactory('Down and Out in Paris and London', 'George Orwell', 232, true),
-    bookFactory('Homage to Catalonia', 'George Orwell', 202, true),
-  ];
+  let myLibrary = loadFromLocalStorage();
+  if (myLibrary.length === 0) {
+    myLibrary = [
+      bookFactory(
+        'Down and Out in Paris and London',
+        'George Orwell',
+        232,
+        true,
+      ),
+      bookFactory('Homage to Catalonia', 'George Orwell', 202, true),
+    ];
+    saveToLocalStorage();
+  }
 
   function createBook(e) {
     e.preventDefault();
@@ -34,6 +58,7 @@
 
     const newBook = bookFactory(title.value, author.value, pages.value, read);
     addBookToLibrary(newBook);
+    saveToLocalStorage();
     clearForm();
     viewBookList(myLibrary);
     addIdToCard();
@@ -115,6 +140,7 @@
     ); // Get book's ID
     myLibrary.splice(bookIndex, 1);
     viewBookList(myLibrary);
+    saveToLocalStorage();
   }
 
   function handleToggleRead(e) {
@@ -127,6 +153,7 @@
       : (myLibrary[bookIndex].read = true);
 
     viewBookList(myLibrary);
+    saveToLocalStorage();
   }
 
   function clearDOM(element) {
