@@ -17,7 +17,7 @@
   }
 
   // Seed library
-  let myLibrary = [
+  const myLibrary = [
     bookFactory('Down and Out in Paris and London', 'George Orwell', 232, true),
     bookFactory('Homage to Catalonia', 'George Orwell', 202, true),
   ];
@@ -30,7 +30,7 @@
       return;
     }
 
-    let read = document.querySelector('.read').checked || true;
+    const read = document.querySelector('.read').checked;
 
     const newBook = bookFactory(title.value, author.value, pages.value, read);
     addBookToLibrary(newBook);
